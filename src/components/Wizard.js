@@ -2,34 +2,52 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaSearch, FaBackspace } from "react-icons/fa";
 import axios from "axios";
+import { key } from "../apiKey";
+import city from "../icons/city.png";
+import humidity from "../icons/humidity.png";
+import longitude from "../icons/longitude.png";
+import latitude from "../icons/latitude.png";
+import pressure from "../icons/pressure.png";
+import wind from "../icons/wind.png";
+import temperature from "../icons/temperature.png";
+import eye from "../icons/eye.png";
+import temperature_outside from "../icons/temperature_outside.png";
 const Wizard = () => {
   const [name, setName] = useState("");
   const [data, setData] = useState([
     {
-      celcius: 10 + "c",
-      name: "London",
-      humidity: 10,
-      wind: 2,
-      coLon: 50.5,
-      coLat: 50.5,
+      pressure: "",
+      celcius: "",
+      name: "",
+      country: "",
+      humidity: "",
+      wind: "",
+      coLon: "",
+      coLat: "",
+      visibility: "",
+      des: "",
     },
   ]);
   useEffect(() => {}, []);
   const fetchHandler = () => {
     if (name !== "") {
-      const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=f52100a1e77852d08e5b63260b0747d3&units=metric`;
+      const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${key}&units=metric`;
       axios
         .get(apiURL)
         .then((res) => {
           console.log(res.data);
           setData({
             ...data,
+            pressure: res.data.main.pressure,
             celcius: res.data.main.temp,
+            country: res.data.sys.country,
             name: res.data.name,
             humidity: res.data.main.humidity,
             wind: res.data.wind.speed,
             coLon: res.data.coord.lon,
             coLat: res.data.coord.lat,
+            visibility: res.data.visibility,
+            des: res.data.weather[0].description,
           });
         })
         .catch((err) => console.log(err));
@@ -69,28 +87,88 @@ const Wizard = () => {
       <StyledLowerBody>
         <Cards>
           <Card className="city-name">
-            <h3>City Name: </h3>
-            <p>{data.name}</p>
+            <div>
+              <img src={city} alt="weather-icons" />
+            </div>
+            <div>
+              <h3>City Name: </h3>
+              <p>
+                {data.name} , {data.country}
+              </p>
+            </div>
           </Card>
           <Card className="city-temp">
-            <h3>Temperature: </h3>
-            <p>{data.celcius}</p>
+            <div>
+              <img src={temperature} alt="weather-icons" />
+            </div>
+            <div>
+              <h3>Temperature: </h3>
+              <p>{data.celcius}°c</p>
+            </div>
           </Card>
-          <Card className="city-lon">
-            <h3>Longitude: </h3>
-            <p>{data.coLon}</p>
+          <Card className="city-pressure">
+            <div>
+              <img src={pressure} alt="weather-icons" />
+            </div>
+            <div>
+              <h3>Pressure: </h3>
+              <p>{data.pressure} p</p>
+            </div>
           </Card>
-          <Card className="city-lat">
-            <h3>Latitude: </h3>
-            <p>{data.coLat}</p>
+          <Card className="city-des">
+            <div>
+              <img src={temperature_outside} alt="weather-icons" />
+            </div>
+            <div>
+              <h3>Current Status: </h3>
+              <p>{data.des}</p>
+            </div>
           </Card>
           <Card className="city-humidity">
-            <h3>Humidity: </h3>
-            <p>{data.humidity}</p>
+            <div>
+              <img src={humidity} alt="weather-icons" />
+            </div>
+            <div>
+              <h3>Humidity: </h3>
+              <p>{data.humidity}%</p>
+            </div>
           </Card>
           <Card className="city-wind">
-            <h3>Wind Speed: </h3>
-            <p>{data.wind}</p>
+            <div>
+              <img src={wind} alt="weather-icons" />
+            </div>
+            <div>
+              <h3>Wind Speed: </h3>
+              <p>{data.wind}kn</p>
+            </div>
+          </Card>
+
+          <Card className="city-visibility">
+            <div>
+              <img src={eye} alt="weather-icons" />
+            </div>
+            <div>
+              <h3>Visibility: </h3>
+              <p>{data.visibility}</p>
+            </div>
+          </Card>
+          <Card className="city-lon">
+            <div>
+              <img src={longitude} alt="weather-icons" />
+            </div>
+            <div>
+              <h3>Longitude: </h3>
+              <p>{data.coLon}°</p>
+            </div>
+          </Card>
+          <Card className="city-lat">
+            <div>
+              <img src={latitude} alt="weather-icons" />
+            </div>
+            <div>
+              <h3>Latitude: </h3>
+              <p>{data.coLat}°</p>
+            </div>
           </Card>
         </Cards>
       </StyledLowerBody>
@@ -98,11 +176,7 @@ const Wizard = () => {
   );
 };
 
-const StyledBody = styled.div`
-  //display: flex;
-  //align-items: center;
-  //justify-content: center;
-`;
+const StyledBody = styled.div``;
 
 const StyledUpperBody = styled.div`
   display: flex;
@@ -116,29 +190,37 @@ const StyledLowerBody = styled.div`
 `;
 
 const Cards = styled.div`
-  margin-top: 3rem;
-  width: 70vw;
-  //display: flex;
-  //display: grid;
-  //grid-template-columns: auto auto auto;
+  margin-top: 0rem;
+  width: 71vw;
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto auto auto;
 `;
 
 const Card = styled.div`
   display: flex;
-  color: ghostwhite;
+  background-color: ghostwhite;
   align-items: center;
-  height: 3rem;
-  width: 20rem;
+  height: 6rem;
+  width: auto;
   border: 2px solid ghostwhite;
   border-radius: 10px;
   padding: 0.5rem;
-  margin-bottom: 1rem;
+  margin: 1rem;
   h3 {
     width: 9rem;
   }
   p {
-    padding-top: 0.2rem;
-    padding-left: 1rem;
+    padding-top: 1rem;
+    font-size: 1.25rem;
+  }
+  div {
+    img {
+      margin-left: 20%;
+      margin-right: 20%;
+      width: 4rem;
+    }
+    width: 50%;
   }
 `;
 

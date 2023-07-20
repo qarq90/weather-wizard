@@ -3,7 +3,6 @@ import styled from "styled-components";
 import "./styles/styles.css";
 import Wizard from "./components/Wizard";
 import wizHat from "../src/img/wizhat.png";
-//import {} from "react-icons/fa6";
 
 function App() {
   return (
