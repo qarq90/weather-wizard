@@ -132,59 +132,6 @@ const StyledLowerBody = styled.div`
   justify-content: center;
 `;
 
-// const WeatherData = styled(motion.div)`
-//   width: 72vw;
-//   display: grid;
-//   align-items: center;
-//   grid-template-columns: auto auto auto;
-//   @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
-//     display: flex;
-//     flex-direction: column;
-//     width: 95vw;
-//   }
-// `;
-
-// const Card = styled(motion.div)`
-//   display: flex;
-//   background-color: ghostwhite;
-//   align-items: center;
-//   height: 6rem;
-//   width: auto;
-//   border: 2px solid ghostwhite;
-//   border-radius: 10px;
-//   padding: 0.5rem;
-//   margin: 1rem;
-//   h3 {
-//     width: 9rem;
-//     margin-bottom: 1rem;
-//   }
-//   p {
-//     font-size: 1.1rem;
-//   }
-//   div {
-//     img {
-//       margin-left: 20%;
-//       margin-right: 20%;
-//       width: 4rem;
-//     }
-//     width: 50%;
-//   }
-//   @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
-//     margin: 0.5rem;
-//     padding: 0;
-//     border: 2px solid ghostwhite;
-//     border-radius: 10px;
-//     width: 85vw;
-//     height: 7rem;
-//     div {
-//       width: 50%;
-//       img {
-//         width: 5rem;
-//       }
-//     }
-//   }
-// `;
-
 const StyledInput = styled(motion.input)`
   font-family: "Manrope", sans-serif;
   font-weight: bold;
