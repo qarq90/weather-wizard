@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { FaSearch, FaBackspace } from "react-icons/fa";
 import axios from "axios";
+import { motion } from "framer-motion";
+import { scaleUp, click } from "./animations";
+import { FaSearch, FaBackspace } from "react-icons/fa";
 import { key } from "../apiKey";
-import city from "../icons/city.png";
-import humidity from "../icons/humidity.png";
-import longitude from "../icons/longitude.png";
-import latitude from "../icons/latitude.png";
-import pressure from "../icons/pressure.png";
-import wind from "../icons/wind.png";
-import temperature from "../icons/temperature.png";
+import "../styles/styles.css";
 import eye from "../icons/eye.png";
+import city from "../icons/city.png";
+import wind from "../icons/wind.png";
+import humidity from "../icons/humidity.png";
+import pressure from "../icons/pressure.png";
+import latitude from "../icons/latitude.png";
+import longitude from "../icons/longitude.png";
+import temperature from "../icons/temperature.png";
 import temperature_outside from "../icons/temperature_outside.png";
 const Wizard = () => {
+  let inputText = document.getElementById("input-box");
+  const [show, setShow] = useState(false);
   const [name, setName] = useState("");
   const [data, setData] = useState([
     {
@@ -36,6 +41,11 @@ const Wizard = () => {
         .get(apiURL)
         .then((res) => {
           console.log(res.data);
+          if (inputText.value === "") {
+            setShow(false);
+          } else {
+            setShow(true);
+          }
           setData({
             ...data,
             pressure: res.data.main.pressure,
@@ -51,11 +61,18 @@ const Wizard = () => {
           });
         })
         .catch((err) => console.log(err));
+    } else {
+      alert("Enter a Valid City or Country name...");
     }
   };
   const clearHandler = () => {
     let clearInput = document.getElementById("input-box");
-    clearInput.value = "";
+    if (clearInput.value === "") {
+      alert("Input Field is already Empty...");
+    } else {
+      clearInput.value = "";
+      setShow(false);
+    }
   };
   return (
     <StyledBody>
@@ -66,7 +83,7 @@ const Wizard = () => {
           id="input-box"
           placeholder="Enter your city here:"
         ></StyledInput>
-        <InputButtons onClick={fetchHandler}>
+        <InputButtons variants={click} whileTap="show" onClick={fetchHandler}>
           <FaSearch
             size={30}
             style={{
@@ -74,9 +91,8 @@ const Wizard = () => {
             }}
           />
         </InputButtons>
-        <InputButtons>
+        <InputButtons onClick={clearHandler} variants={click} whileTap="show">
           <FaBackspace
-            onClick={clearHandler}
             size={30}
             style={{
               backgroundColor: "transparent",
@@ -85,89 +101,105 @@ const Wizard = () => {
         </InputButtons>
       </StyledUpperBody>
       <StyledLowerBody>
-        <Cards>
-          <Card className="city-name">
+        <Cards variants={scaleUp} initial="initial" animate="show">
+          <Card variants={scaleUp} className="city-name">
             <div>
               <img src={city} alt="weather-icons" />
             </div>
             <div>
               <h3>City Name: </h3>
-              <p>
+              <p className={`${show ? "text-show" : "text-hide"}`}>
                 {data.name} , {data.country}
               </p>
             </div>
           </Card>
-          <Card className="city-temp">
+          <Card variants={scaleUp} className="city-temp">
             <div>
               <img src={temperature} alt="weather-icons" />
             </div>
             <div>
               <h3>Temperature: </h3>
-              <p>{data.celcius}°c</p>
+              <p className={`${show ? "text-show" : "text-hide"}`}>
+                {data.celcius}°c
+              </p>
             </div>
           </Card>
-          <Card className="city-pressure">
+          <Card variants={scaleUp} className="city-pressure">
             <div>
               <img src={pressure} alt="weather-icons" />
             </div>
             <div>
               <h3>Pressure: </h3>
-              <p>{data.pressure} p</p>
+              <p className={`${show ? "text-show" : "text-hide"}`}>
+                {data.pressure} p
+              </p>
             </div>
           </Card>
-          <Card className="city-des">
+          <Card variants={scaleUp} className="city-des">
             <div>
               <img src={temperature_outside} alt="weather-icons" />
             </div>
             <div>
               <h3>Current Status: </h3>
-              <p>{data.des}</p>
+              <p className={`${show ? "text-show" : "text-hide"}`}>
+                {data.des}
+              </p>
             </div>
           </Card>
-          <Card className="city-humidity">
+          <Card variants={scaleUp} className="city-humidity">
             <div>
               <img src={humidity} alt="weather-icons" />
             </div>
             <div>
               <h3>Humidity: </h3>
-              <p>{data.humidity}%</p>
+              <p className={`${show ? "text-show" : "text-hide"}`}>
+                {data.humidity}%
+              </p>
             </div>
           </Card>
-          <Card className="city-wind">
+          <Card variants={scaleUp} className="city-wind">
             <div>
               <img src={wind} alt="weather-icons" />
             </div>
             <div>
               <h3>Wind Speed: </h3>
-              <p>{data.wind}kn</p>
+              <p className={`${show ? "text-show" : "text-hide"}`}>
+                {data.wind}kn
+              </p>
             </div>
           </Card>
 
-          <Card className="city-visibility">
+          <Card variants={scaleUp} className="city-visibility">
             <div>
               <img src={eye} alt="weather-icons" />
             </div>
             <div>
               <h3>Visibility: </h3>
-              <p>{data.visibility}</p>
+              <p className={`${show ? "text-show" : "text-hide"}`}>
+                {data.visibility}
+              </p>
             </div>
           </Card>
-          <Card className="city-lon">
+          <Card variants={scaleUp} className="city-lon">
             <div>
               <img src={longitude} alt="weather-icons" />
             </div>
             <div>
               <h3>Longitude: </h3>
-              <p>{data.coLon}°</p>
+              <p className={`${show ? "text-show" : "text-hide"}`}>
+                {data.coLon}°
+              </p>
             </div>
           </Card>
-          <Card className="city-lat">
+          <Card variants={scaleUp} className="city-lat">
             <div>
               <img src={latitude} alt="weather-icons" />
             </div>
             <div>
               <h3>Latitude: </h3>
-              <p>{data.coLat}°</p>
+              <p className={`${show ? "text-show" : "text-hide"}`}>
+                {data.coLat}°
+              </p>
             </div>
           </Card>
         </Cards>
@@ -189,7 +221,7 @@ const StyledLowerBody = styled.div`
   justify-content: center;
 `;
 
-const Cards = styled.div`
+const Cards = styled(motion.div)`
   margin-top: 0rem;
   width: 71vw;
   display: grid;
@@ -197,7 +229,7 @@ const Cards = styled.div`
   grid-template-columns: auto auto auto;
 `;
 
-const Card = styled.div`
+const Card = styled(motion.div)`
   display: flex;
   background-color: ghostwhite;
   align-items: center;
@@ -209,10 +241,10 @@ const Card = styled.div`
   margin: 1rem;
   h3 {
     width: 9rem;
+    margin-bottom: 1rem;
   }
   p {
-    padding-top: 1rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
   div {
     img {
@@ -239,7 +271,7 @@ const StyledInput = styled.input`
   margin: 0.5rem;
 `;
 
-const InputButtons = styled.div`
+const InputButtons = styled(motion.div)`
   background-color: ghostwhite;
   color: #32174d;
   display: flex;

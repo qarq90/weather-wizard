@@ -3,3 +3,11 @@
     padding: 0;
     overflow-x: hidden;
 }
+
+.text-show{
+    display: contents;
+}
+
+.text-hide{
+    display: none;
+}
