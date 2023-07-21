@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { motion } from "framer-motion";
@@ -21,6 +21,7 @@ const Wizard = () => {
   const [name, setName] = useState("");
   const [data, setData] = useState([
     {
+      icon: "",
       pressure: "",
       celcius: "",
       name: "",
@@ -33,7 +34,6 @@ const Wizard = () => {
       des: "",
     },
   ]);
-  useEffect(() => {}, []);
   const fetchHandler = () => {
     if (name !== "") {
       const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${key}&units=metric`;
@@ -58,13 +58,17 @@ const Wizard = () => {
             coLat: res.data.coord.lat,
             visibility: res.data.visibility,
             des: res.data.weather[0].description,
+            icon: res.data.weather[0].icon,
           });
+          //console.log(data.icon);
         })
         .catch((err) => console.log(err));
+      console.log(data.icon);
     } else {
       alert("Enter a Valid City or Country name...");
     }
   };
+
   const clearHandler = () => {
     let clearInput = document.getElementById("input-box");
     if (clearInput.value === "") {
@@ -86,29 +90,22 @@ const Wizard = () => {
           id="input-box"
           placeholder="Enter your city here:"
         ></StyledInput>
-        <motion.div
-          className="btn-div"
-          variants={scaleUp}
-          initial="initial"
-          animate="show"
-        >
-          <InputButtons variants={click} whileTap="show" onClick={fetchHandler}>
-            <FaSearch
-              size={30}
-              style={{
-                backgroundColor: "transparent",
-              }}
-            />
-          </InputButtons>
-          <InputButtons onClick={clearHandler} variants={click} whileTap="show">
-            <FaBackspace
-              size={30}
-              style={{
-                backgroundColor: "transparent",
-              }}
-            />
-          </InputButtons>
-        </motion.div>
+        <InputButtons variants={click} whileTap="show" onClick={fetchHandler}>
+          <FaSearch
+            size={30}
+            style={{
+              backgroundColor: "transparent",
+            }}
+          />
+        </InputButtons>
+        <InputButtons onClick={clearHandler} variants={click} whileTap="show">
+          <FaBackspace
+            size={30}
+            style={{
+              backgroundColor: "transparent",
+            }}
+          />
+        </InputButtons>
       </StyledUpperBody>
       <StyledLowerBody>
         <Cards variants={scaleUp} initial="initial" animate="show">
@@ -362,7 +359,7 @@ const InputButtons = styled(motion.div)`
   }
   @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
     padding: 0rem;
-    width: 41vw;
+    width: 86vw;
     height: 3rem;
   }
 `;
