@@ -78,27 +78,37 @@ const Wizard = () => {
     <StyledBody>
       <StyledUpperBody>
         <StyledInput
+          variants={scaleUp}
+          initial="initial"
+          animate="show"
           onChange={(e) => setName(e.target.value)}
           type="text"
           id="input-box"
           placeholder="Enter your city here:"
         ></StyledInput>
-        <InputButtons variants={click} whileTap="show" onClick={fetchHandler}>
-          <FaSearch
-            size={30}
-            style={{
-              backgroundColor: "transparent",
-            }}
-          />
-        </InputButtons>
-        <InputButtons onClick={clearHandler} variants={click} whileTap="show">
-          <FaBackspace
-            size={30}
-            style={{
-              backgroundColor: "transparent",
-            }}
-          />
-        </InputButtons>
+        <motion.div
+          className="btn-div"
+          variants={scaleUp}
+          initial="initial"
+          animate="show"
+        >
+          <InputButtons variants={click} whileTap="show" onClick={fetchHandler}>
+            <FaSearch
+              size={30}
+              style={{
+                backgroundColor: "transparent",
+              }}
+            />
+          </InputButtons>
+          <InputButtons onClick={clearHandler} variants={click} whileTap="show">
+            <FaBackspace
+              size={30}
+              style={{
+                backgroundColor: "transparent",
+              }}
+            />
+          </InputButtons>
+        </motion.div>
       </StyledUpperBody>
       <StyledLowerBody>
         <Cards variants={scaleUp} initial="initial" animate="show">
@@ -111,6 +121,9 @@ const Wizard = () => {
               <p className={`${show ? "text-show" : "text-hide"}`}>
                 {data.name} , {data.country}
               </p>
+              <h4 className={`${show ? "text-hide" : "text-show"}`}>
+                [Enter a city name first]
+              </h4>
             </div>
           </Card>
           <Card variants={scaleUp} className="city-temp">
@@ -122,6 +135,9 @@ const Wizard = () => {
               <p className={`${show ? "text-show" : "text-hide"}`}>
                 {data.celcius}°c
               </p>
+              <h4 className={`${show ? "text-hide" : "text-show"}`}>
+                [Enter a city name first]
+              </h4>
             </div>
           </Card>
           <Card variants={scaleUp} className="city-pressure">
@@ -133,6 +149,9 @@ const Wizard = () => {
               <p className={`${show ? "text-show" : "text-hide"}`}>
                 {data.pressure} p
               </p>
+              <h4 className={`${show ? "text-hide" : "text-show"}`}>
+                [Enter a city name first]
+              </h4>
             </div>
           </Card>
           <Card variants={scaleUp} className="city-des">
@@ -144,6 +163,9 @@ const Wizard = () => {
               <p className={`${show ? "text-show" : "text-hide"}`}>
                 {data.des}
               </p>
+              <h4 className={`${show ? "text-hide" : "text-show"}`}>
+                [Enter a city name first]
+              </h4>
             </div>
           </Card>
           <Card variants={scaleUp} className="city-humidity">
@@ -155,6 +177,9 @@ const Wizard = () => {
               <p className={`${show ? "text-show" : "text-hide"}`}>
                 {data.humidity}%
               </p>
+              <h4 className={`${show ? "text-hide" : "text-show"}`}>
+                [Enter a city name first]
+              </h4>
             </div>
           </Card>
           <Card variants={scaleUp} className="city-wind">
@@ -166,9 +191,11 @@ const Wizard = () => {
               <p className={`${show ? "text-show" : "text-hide"}`}>
                 {data.wind}kn
               </p>
+              <h4 className={`${show ? "text-hide" : "text-show"}`}>
+                [Enter a city name first]
+              </h4>
             </div>
           </Card>
-
           <Card variants={scaleUp} className="city-visibility">
             <div>
               <img src={eye} alt="weather-icons" />
@@ -178,6 +205,9 @@ const Wizard = () => {
               <p className={`${show ? "text-show" : "text-hide"}`}>
                 {data.visibility}
               </p>
+              <h4 className={`${show ? "text-hide" : "text-show"}`}>
+                [Enter a city name first]
+              </h4>
             </div>
           </Card>
           <Card variants={scaleUp} className="city-lon">
@@ -189,6 +219,9 @@ const Wizard = () => {
               <p className={`${show ? "text-show" : "text-hide"}`}>
                 {data.coLon}°
               </p>
+              <h4 className={`${show ? "text-hide" : "text-show"}`}>
+                [Enter a city name first]
+              </h4>
             </div>
           </Card>
           <Card variants={scaleUp} className="city-lat">
@@ -200,6 +233,9 @@ const Wizard = () => {
               <p className={`${show ? "text-show" : "text-hide"}`}>
                 {data.coLat}°
               </p>
+              <h4 className={`${show ? "text-hide" : "text-show"}`}>
+                [Enter a city name first]
+              </h4>
             </div>
           </Card>
         </Cards>
@@ -214,6 +250,18 @@ const StyledUpperBody = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    display: flex;
+    flex-direction: column;
+    .btn-div {
+      display: flex;
+    }
+  }
+  .btn-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const StyledLowerBody = styled.div`
@@ -222,11 +270,15 @@ const StyledLowerBody = styled.div`
 `;
 
 const Cards = styled(motion.div)`
-  margin-top: 0rem;
-  width: 71vw;
+  width: 72vw;
   display: grid;
   align-items: center;
   grid-template-columns: auto auto auto;
+  @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    display: flex;
+    flex-direction: column;
+    width: 95vw;
+  }
 `;
 
 const Card = styled(motion.div)`
@@ -244,7 +296,7 @@ const Card = styled(motion.div)`
     margin-bottom: 1rem;
   }
   p {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   div {
     img {
@@ -254,9 +306,23 @@ const Card = styled(motion.div)`
     }
     width: 50%;
   }
+  @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    margin: 0.5rem;
+    padding: 0;
+    border: 2px solid ghostwhite;
+    border-radius: 10px;
+    width: 85vw;
+    height: 7rem;
+    div {
+      width: 50%;
+      img {
+        width: 5rem;
+      }
+    }
+  }
 `;
 
-const StyledInput = styled.input`
+const StyledInput = styled(motion.input)`
   font-family: "Manrope", sans-serif;
   font-weight: bold;
   background-color: ghostwhite;
@@ -269,6 +335,10 @@ const StyledInput = styled.input`
   font-size: 1.75rem;
   color: #32174d;
   margin: 0.5rem;
+  @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    padding: 1rem;
+    width: 80vw;
+  }
 `;
 
 const InputButtons = styled(motion.div)`
@@ -289,6 +359,11 @@ const InputButtons = styled(motion.div)`
     color: #ffd700;
     background-color: #32174d;
     border: 2px solid #ffd700;
+  }
+  @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    padding: 0rem;
+    width: 41vw;
+    height: 3rem;
   }
 `;
 

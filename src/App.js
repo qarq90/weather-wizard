@@ -41,13 +41,27 @@ const StyledTitle = styled.div`
     &:hover {
       transform: rotate(540deg);
     }
+    @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    }
+  }
+  @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    display: flex;
+    margin: 2rem 0rem 2rem 0rem;
+    padding: 0;
+    h1 {
+      text-align: center;
+    }
   }
 `;
 
 const StyledImg = styled.img`
   transition: 1s ease transform;
+  animation: 1s Flip linear infinite;
   &:hover {
     transform: rotate(360deg);
+  }
+  @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    width: 30vw;
   }
 `;
 
