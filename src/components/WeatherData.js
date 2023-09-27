@@ -21,7 +21,7 @@ const WeatherData = ({ data, show }) => {
           <div>
             <img src={city} alt="weather-icons" />
           </div>
-          <div>
+          <div className="infoDiv">
             <h3>City Name: </h3>
             <p className={`${show ? "text-show" : "text-hide"}`}>
               {data.name} , {data.country}
@@ -35,7 +35,7 @@ const WeatherData = ({ data, show }) => {
           <div>
             <img src={temperature} alt="weather-icons" />
           </div>
-          <div>
+          <div className="infoDiv">
             <h3>Temperature: </h3>
             <p className={`${show ? "text-show" : "text-hide"}`}>
               {data.celcius}°c
@@ -49,7 +49,7 @@ const WeatherData = ({ data, show }) => {
           <div>
             <img src={pressure} alt="weather-icons" />
           </div>
-          <div>
+          <div className="infoDiv">
             <h3>Pressure: </h3>
             <p className={`${show ? "text-show" : "text-hide"}`}>
               {data.pressure} p
@@ -63,7 +63,7 @@ const WeatherData = ({ data, show }) => {
           <div>
             <img src={temperature_outside} alt="weather-icons" />
           </div>
-          <div>
+          <div className="infoDiv">
             <h3>Current Status: </h3>
             <p className={`${show ? "text-show" : "text-hide"}`}>{data.des}</p>
             <h4 className={`${show ? "text-hide" : "text-show"}`}>
@@ -75,7 +75,7 @@ const WeatherData = ({ data, show }) => {
           <div>
             <img src={humidity} alt="weather-icons" />
           </div>
-          <div>
+          <div className="infoDiv">
             <h3>Humidity: </h3>
             <p className={`${show ? "text-show" : "text-hide"}`}>
               {data.humidity}%
@@ -89,7 +89,7 @@ const WeatherData = ({ data, show }) => {
           <div>
             <img src={wind} alt="weather-icons" />
           </div>
-          <div>
+          <div className="infoDiv">
             <h3>Wind Speed: </h3>
             <p className={`${show ? "text-show" : "text-hide"}`}>
               {data.wind}kn
@@ -103,7 +103,7 @@ const WeatherData = ({ data, show }) => {
           <div>
             <img src={eye} alt="weather-icons" />
           </div>
-          <div>
+          <div className="infoDiv">
             <h3>Visibility: </h3>
             <p className={`${show ? "text-show" : "text-hide"}`}>
               {data.visibility}
@@ -117,7 +117,7 @@ const WeatherData = ({ data, show }) => {
           <div>
             <img src={longitude} alt="weather-icons" />
           </div>
-          <div>
+          <div className="infoDiv">
             <h3>Longitude: </h3>
             <p className={`${show ? "text-show" : "text-hide"}`}>
               {data.coLon}°
@@ -131,7 +131,7 @@ const WeatherData = ({ data, show }) => {
           <div>
             <img src={latitude} alt="weather-icons" />
           </div>
-          <div>
+          <div className="infoDiv">
             <h3>Latitude: </h3>
             <p className={`${show ? "text-show" : "text-hide"}`}>
               {data.coLat}°
@@ -159,12 +159,14 @@ const Cards = styled(motion.div)`
 `;
 
 const Card = styled(motion.div)`
+  font-family: sans-serif;
   display: flex;
-  background-color: ghostwhite;
+  color: ghostwhite;
+  background-color: #574685;
   align-items: center;
   height: 6rem;
   width: auto;
-  border: 2px solid ghostwhite;
+  border: 2px solid #ffd700;
   border-radius: 10px;
   padding: 0.5rem;
   margin: 1rem;
@@ -182,6 +184,9 @@ const Card = styled(motion.div)`
       width: 4rem;
     }
     width: 50%;
+  }
+  .infoDiv{
+    width: 100%;
   }
   @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
     margin: 0.5rem;

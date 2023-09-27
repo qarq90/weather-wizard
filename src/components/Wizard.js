@@ -136,8 +136,7 @@ const StyledInput = styled(motion.input)`
   font-family: "Manrope", sans-serif;
   font-weight: bold;
   background-color: ghostwhite;
-  color: darkgray;
-  width: 30em;
+  width: 59%;
   height: 2.5rem;
   padding: 0.5rem;
   border-radius: 10px;
