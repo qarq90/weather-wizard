@@ -187,6 +187,9 @@ const Card = styled(motion.div)`
   }
   .infoDiv{
     width: 100%;
+    @media screen and (min-device-width: 320px) and (max-device-width: 480px){
+      width: 50%;
+    }
   }
   @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
     margin: 0.5rem;
