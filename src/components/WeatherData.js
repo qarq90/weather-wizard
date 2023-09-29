@@ -172,6 +172,8 @@ const Card = styled(motion.div)`
   margin: 1rem;
   h3 {
     width: 9rem;
+    font-weight: lighter;
+    letter-spacing: 1px;
     margin-bottom: 1rem;
   }
   p {

@@ -142,7 +142,7 @@ const StyledLowerBody = styled.div`
 const StyledInput = styled(motion.input)`
   font-family: "Manrope", sans-serif;
   font-weight: bold;
-  background-color: ghostwhite;
+  background-color: transparent;
   width: 59%;
   height: 2.5rem;
   padding: 0.5rem;
@@ -151,6 +151,9 @@ const StyledInput = styled(motion.input)`
   font-size: 1.75rem;
   color: #32174d;
   margin: 0.5rem;
+  &:focus{
+    background-color: #fff;
+  }
   @media screen and (min-device-width: 320px) and (max-device-width: 480px) {
     padding: 1rem;
     width: 80vw;

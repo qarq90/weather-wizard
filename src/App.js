@@ -18,9 +18,22 @@ function App() {
 }
 
 const StyledApp = styled.div`
-  background-color: #32174d;
   width: 100vw;
+  background: linear-gradient(-45deg, #e73c7e, #9932cc, #ccc, #ffd700);
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
   height: 100vh;
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 `;
 
 const StyledTitle = styled.div`
