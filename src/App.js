@@ -20,7 +20,7 @@ function App() {
 const StyledApp = styled.div`
   width: 100vw;
   background: linear-gradient(-45deg, #e73c7e, #9932cc, #ccc, #ffd700);
-  animation: gradient 15s ease infinite;
+  animation: gradient 5s ease infinite;
   background-size: 400% 400%;
   height: 100vh;
   @keyframes gradient {
